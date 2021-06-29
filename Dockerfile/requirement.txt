@@ -1,0 +1,4 @@
+mlflow
+sklearn
+minio
+boto3

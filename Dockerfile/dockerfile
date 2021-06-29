@@ -1,0 +1,12 @@
+FROM python
+
+RUN mkdir c:\home\helloworld
+
+COPY mlffk.py /home/helloworld/mlffk.py
+COPY /data /home/helloworld/data/
+COPY requirement.txt ./
+
+RUN pip install --no-cache-dir -r requirement.txt
+
+#CMD python /home/helloworld/mlffk.py
+ENTRYPOINT ["python", "/home/helloworld/mlffk.py"]
