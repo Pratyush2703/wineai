@@ -29,7 +29,8 @@ X_train, X_val, y_train, y_val = train_test_split(X, y, random_state = 42)
 alpha = 1
 l1_ratio = 1
 
-with mlflow.start_run():
+mlflow.set_experiment("sensorerror")
+with mlflow.start_run(experiment_id=mlflow.get_experiment_by_name("sensorerror").experiment_id):
 # Instantiating model with model parameters
     model = ElasticNet(alpha = alpha,
                        l1_ratio = l1_ratio)
@@ -47,11 +48,12 @@ with mlflow.start_run():
     mlflow.log_metric('rmse', rmse)
     mlflow.log_metric('abs_error', abs_error)
     mlflow.log_metric('r2', r2)
+ 
 # Logging training data
     mlflow.log_artifact("/home/helloworld/mlffk.py")
 # Logging training code
     mlflow.log_artifact(local_path = '/home/helloworld/data/train.csv')
 # Logging model to MLFlow
     mlflow.sklearn.log_model(sk_model = model,
-                             artifact_path = 'wine-pyfile-model',
-                             registered_model_name = 'wine-pyfile-model')
+                             artifact_path = 'sensorerror',
+                             registered_model_name = 'sensorerror-model')
